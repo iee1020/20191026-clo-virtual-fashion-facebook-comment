@@ -1,0 +1,30 @@
+@import "styles/common";
+
+#form {
+  display: flex;
+  flex-direction: row;
+}
+
+#input {
+  padding: 8px 12px;
+  border: 1px solid #ccd0d5;
+  border-radius: 16px;
+  background-color: #f2f3f5;
+  font-size: 13px;
+  &::placeholder {
+    color: #8d949e;
+  }
+  &:focus {
+    outline: none;
+    &::placeholder {
+      color: #ccd0d5;
+    }
+  }
+  @include M-W-H(434px, 16px);
+}
+
+#enterStr {
+  padding: 1px 0 0 40px;
+  color: #90949c;
+  font-size: 9px;
+}

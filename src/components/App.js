@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import CommentsBox from "./CommentsBox";
+import "./App.scss";
 
 class App extends Component {
   render() {
-    const name = "CLO";
-    return <div>hello {name}</div>;
+    return (
+      <div id="all">
+        <div id="header">댓글</div>
+        <CommentsBox />
+      </div>
+    );
   }
 }
 

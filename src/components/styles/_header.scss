@@ -1,0 +1,33 @@
+@import "styles/common";
+
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: inherit;
+  position: relative;
+  background-color: $body-color;
+  @include M-FLEX-CENTER;
+}
+
+#all {
+  width: $box-width;
+  margin-top: 10%;
+  border: $line;
+  border-radius: $radius;
+}
+
+#header {
+  height: $header-height;
+  border: {
+    radius: $top-lr-radius;
+    bottom: $line;
+  }
+  @include M-FLEX-CENTER;
+  @include M-BACK-COLOR;
+}
