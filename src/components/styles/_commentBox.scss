@@ -1,0 +1,14 @@
+@import "styles/common";
+
+#commentBox {
+  padding: 12px;
+  border-radius: $bottom-lr-radius;
+  @include M-BACK-COLOR;
+}
+
+.proCircle {
+  margin-right: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  @include M-W-H(32px, 32px);
+}

@@ -1,0 +1,59 @@
+@import "styles/common";
+
+#comment {
+  padding: 4px 0;
+}
+
+.commentText {
+  padding: 8px 10px;
+  min-height: 16px;
+  max-width: 100%;
+  font-size: 13px;
+  color: #1c1e21;
+  background-color: #f2f3f5;
+  border-radius: 18px;
+}
+
+.userName {
+  font-weight: bolder;
+  color: $facebook-color;
+  margin-right: 5px;
+  @include M-CURSOR;
+}
+
+.deleteBtn {
+  padding: 0 0 0 10px;
+  border: 1px solid white;
+  font-size: 13px;
+  color: $spot-color;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: $spot-deep;
+    cursor: pointer;
+  }
+  @include M-BACK-COLOR;
+}
+
+.gAndT {
+  padding: 3px 0 3px 50px;
+  font-size: 12px;
+}
+
+.time {
+  color: #606770;
+}
+
+.goodBtn {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: $facebook-color;
+  border: 1px solid white;
+  &:focus {
+    outline: none;
+    background-color: white;
+  }
+  @include M-CURSOR;
+}
