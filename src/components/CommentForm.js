@@ -11,10 +11,6 @@ class CommentForm extends Component {
     profile: IMG_URL
   };
 
-  // componentDidUpdate() {
-
-  // }
-
   handleChange = (key, value) => {
     this.setState({
       [key]: value

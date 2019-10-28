@@ -2,6 +2,7 @@
 $body-color: #e9ebee;
 $all-color: white;
 $line-color: rgb(220, 220, 220);
+$facebook-color: #385898;
 
 // size 변수
 $box-width: 500px;
@@ -11,6 +12,10 @@ $header-height: 42px;
 $radius: 6px;
 $top-lr-radius: 6px 6px 0px 0px;
 $bottom-lr-radius: 0px 0px 6px 6px;
+
+// ...btn color
+$spot-color: #ccd0d5;
+$spot-deep: #8d949e;
 
 // 선
 $line: 1px solid $line-color;
@@ -30,4 +35,11 @@ $line: 1px solid $line-color;
 @mixin M-W-H($width, $height) {
   width: $width;
   height: $height;
+}
+
+@mixin M-CURSOR {
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }

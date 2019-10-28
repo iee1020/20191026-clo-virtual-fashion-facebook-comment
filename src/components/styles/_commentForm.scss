@@ -7,12 +7,12 @@
 
 #input {
   padding: 8px 12px;
-  border: 1px solid #ccd0d5;
+  border: 1px solid $spot-color;
   border-radius: 16px;
   background-color: #f2f3f5;
   font-size: 13px;
   &::placeholder {
-    color: #8d949e;
+    color: $spot-deep;
   }
   &:focus {
     outline: none;
