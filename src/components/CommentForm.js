@@ -7,26 +7,51 @@ const inputText = "댓글을 입력하세요...";
 
 class CommentForm extends Component {
   state = {
-    inputValue: "",
     profile: IMG_URL
   };
 
-  handleChange = (key, value) => {
-    this.setState({
-      [key]: value
-    });
+  currDate = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDay();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return year + "." + month + "." + day + " " + hours + ":" + minutes;
   };
 
   keyPress = event => {
-    if (event.key === "Enter") {
-      this.handleChange("inputValue", "");
+    if (event.keyCode === 13) {
+      const { handleChange, inputValue, localSetItem } = this.props;
+      let getData = localStorage.getItem("CLO");
+      let data = {
+        _id: 0,
+        img: IMG_URL,
+        username: "CLO",
+        comment: inputValue,
+        time: this.currDate(),
+        good: 0
+      };
+
+      if (getData === null) {
+        localSetItem([data]);
+      } else if (getData !== null) {
+        let afterData = JSON.parse(getData);
+        let num = afterData.length;
+        data._id = num;
+        afterData[num] = data;
+        localSetItem(afterData);
+      }
+      // console.log(localStorage.getItem("CLO"));
+      handleChange("inputValue", "");
+      handleChange("check", false);
     }
   };
 
   render() {
-    const { inputValue, profile } = this.state;
-    const { handleChange, keyPress } = this;
-    console.log(inputValue);
+    const { profile } = this.state;
+    const { keyPress } = this;
+    const { handleChange, inputValue } = this.props;
     return (
       <div>
         <div id="form">
