@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as putDeleteAction from "../store/modules/putDeleteComment";
+import * as CrudActions from "../store/modules/crudComment";
 
 class CommentContainer extends Component {
-  deleteComment = e => {
-    console.log(e.target.value);
-    const { value } = e.target;
-    const { localSetItem, handleChange } = this.props;
-    let getC = JSON.parse(localStorage.getItem("CLO"));
-    getC.splice(value, 1);
-    localSetItem(getC);
-    handleChange("check", false);
-  };
-
-  render() {
-    const { username, comment, time, img, good } = this.props.dataProps;
-    const { index } = this.props;
-    const { deleteComment } = this;
-    console.log(good);
-    let goodCount = good === 0 || good === undefined ? "inline-block" : "none";
-    // let marginNum = 0;
+  goodCountStyle = good => {
+    let goodCount = good === 0 || good === undefined ? "none" : "inline-block";
     let styleObj = {
       display: goodCount
     };
+    return styleObj;
+  };
+
+  goodClickChange = click => {
+    const { increment, decrement, index } = this.props;
+    if (click === false) {
+      increment(index);
+    } else {
+      decrement(index);
+    }
+  };
+
+  render() {
+    const { goodClickChange, goodCountStyle } = this;
+    const { index, deleteComment } = this.props;
+    const { username, comment, time, img, good, click } = this.props.dataProps;
+
     return (
       <div id="comment">
         <div id="form">
@@ -30,16 +32,26 @@ class CommentContainer extends Component {
           <div className="commentText">
             <span className="userName">{username}</span>
             {comment}
-            <span className="goodCount" style={styleObj}>
+            <span className="goodCount" style={goodCountStyle(good)}>
               {good}
             </span>
           </div>
-          <button className="deleteBtn" value={index} onClick={deleteComment}>
+          <button
+            className="deleteBtn"
+            value={index}
+            onClick={() => deleteComment(index)}
+          >
             ×
           </button>
         </div>
         <div className="gAndT">
-          <button className="goodBtn">좋아요</button>
+          <button
+            className="goodBtn"
+            onClick={() => goodClickChange(click)}
+            style={click === true ? { "font-weight": "bold" } : {}}
+          >
+            좋아요
+          </button>
           <span className="time"> · {time}</span>
         </div>
       </div>
@@ -48,11 +60,10 @@ class CommentContainer extends Component {
 }
 
 export default connect(
-  ({ putDeleteComment }) => ({}),
+  null,
   dispatch => ({
-    increment: indx => dispatch(putDeleteAction.increment(indx)),
-    decrement: indx => dispatch(putDeleteAction.decrement(indx)),
-    checkGood: indx => dispatch(putDeleteAction.checkGood(indx)),
-    deleteComment: indx => dispatch(putDeleteAction.deleteComment(indx))
+    increment: indx => dispatch(CrudActions.increment(indx)),
+    decrement: indx => dispatch(CrudActions.decrement(indx)),
+    deleteComment: indx => dispatch(CrudActions.deleteComment(indx))
   })
 )(CommentContainer);

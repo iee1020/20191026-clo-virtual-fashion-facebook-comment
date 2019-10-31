@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as getPostAction from "../store/modules/getPostComment";
-const enterStr = "글을 게시하려면 Enter 키를 누르세요.";
-const inputText = "댓글을 입력하세요...";
+import * as CrudActions from "../store/modules/crudComment";
 
 class FormContainer extends Component {
   currDate = () => {
@@ -26,6 +24,9 @@ class FormContainer extends Component {
   render() {
     const { keyPress } = this;
     const { inputValue, changeInput, profile } = this.props;
+    const enterStr = "글을 게시하려면 Enter 키를 누르세요.";
+    const inputText = "댓글을 입력하세요...";
+
     return (
       <div>
         <div id="form">
@@ -45,13 +46,13 @@ class FormContainer extends Component {
 }
 
 export default connect(
-  ({ getPostComment }) => ({
-    inputValue: getPostComment.get("inputValue"),
-    localStorage: getPostComment.get("localStorage"),
-    profile: getPostComment.get("profile")
+  ({ crudComment }) => ({
+    inputValue: crudComment.get("inputValue"),
+    localStorage: crudComment.get("localStorage"),
+    profile: crudComment.get("profile")
   }),
   dispatch => ({
-    changeInput: char => dispatch(getPostAction.changeInput(char)),
-    postComment: obj => dispatch(getPostAction.postComment(obj))
+    changeInput: char => dispatch(CrudActions.changeInput(char)),
+    postComment: obj => dispatch(CrudActions.postComment(obj))
   })
 )(FormContainer);
