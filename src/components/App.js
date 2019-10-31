@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CommentsBox from "./CommentsBox";
+import BoxContainer from "../containers/BoxContainer";
 import "./App.scss";
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div id="all">
         <div id="header">댓글</div>
-        <CommentsBox />
+        <BoxContainer />
       </div>
     );
   }
