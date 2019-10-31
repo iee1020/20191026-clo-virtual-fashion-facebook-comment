@@ -29,10 +29,9 @@ const localSetItem = (arrData, state) => {
 
 const inDelocalArr = (state, action, num) => {
   let localArr = state.get("localStorage").toArray();
-  let goodNum = localArr[action.payload].good;
-  let boolean = localArr[action.payload].click;
-  localArr[action.payload].click = !boolean;
-  localArr[action.payload].good = goodNum + num;
+  let { click, good } = localArr[action.payload];
+  localArr[action.payload].click = !click;
+  localArr[action.payload].good = good + num;
   return localArr;
 };
 

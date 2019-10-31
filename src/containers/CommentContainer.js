@@ -48,7 +48,7 @@ class CommentContainer extends Component {
           <button
             className="goodBtn"
             onClick={() => goodClickChange(click)}
-            style={click === true ? { "font-weight": "bold" } : {}}
+            style={click === true ? { fontWeight: "bold" } : {}}
           >
             좋아요
           </button>
