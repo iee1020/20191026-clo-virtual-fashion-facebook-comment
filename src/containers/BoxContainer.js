@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 
 class BoxContainer extends Component {
   state = {
-    check: true,
-    inputValue: ""
+    check: true
   };
 
   handleChange = (key, value) => {
@@ -22,7 +21,6 @@ class BoxContainer extends Component {
   componentDidUpdate() {
     if (this.state.check === false) {
       this.handleChange("check", true);
-      this.commentsMap();
     }
   }
 
@@ -31,29 +29,30 @@ class BoxContainer extends Component {
     const { handleChange, localSetItem } = this;
 
     let localData = <div></div>;
+    console.log(localStorage);
 
     if (localStorage !== null) {
-      localData = localStorage.map((x, indx) => (
-        <CommentContainer
-          key={x._id + indx}
-          index={indx}
-          dataProps={x}
-          handleChange={handleChange}
-          localSetItem={localSetItem}
-        />
-      ));
+      localData = localStorage
+        .toArray()
+        .map((x, indx) => (
+          <CommentContainer
+            key={x._id + indx}
+            index={indx}
+            dataProps={x}
+            handleChange={handleChange}
+            localSetItem={localSetItem}
+          />
+        ));
     }
     return localData;
   };
 
   render() {
     const { handleChange, localSetItem, commentsMap } = this;
-    const { inputValue } = this.state;
     return (
       <div id="commentBox">
         {commentsMap()}
         <FormContainer
-          inputValue={inputValue}
           handleChange={handleChange}
           localSetItem={localSetItem}
         />
@@ -62,6 +61,6 @@ class BoxContainer extends Component {
   }
 }
 
-export default connect(state => ({
-  localStorage: state.getPostComment.localStorage
+export default connect(({ getPostComment }) => ({
+  localStorage: getPostComment.get("localStorage")
 }))(BoxContainer);

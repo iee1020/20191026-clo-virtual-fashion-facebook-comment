@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as putDeleteAction from "../store/modules/putDeleteComment";
 
 class CommentContainer extends Component {
   deleteComment = e => {
@@ -45,4 +47,12 @@ class CommentContainer extends Component {
   }
 }
 
-export default CommentContainer;
+export default connect(
+  ({ putDeleteComment }) => ({}),
+  dispatch => ({
+    increment: indx => dispatch(putDeleteAction.increment(indx)),
+    decrement: indx => dispatch(putDeleteAction.decrement(indx)),
+    checkGood: indx => dispatch(putDeleteAction.checkGood(indx)),
+    deleteComment: indx => dispatch(putDeleteAction.deleteComment(indx))
+  })
+)(CommentContainer);
