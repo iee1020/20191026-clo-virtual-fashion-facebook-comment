@@ -5,7 +5,7 @@ const IMG_URL =
 const enterStr = "글을 게시하려면 Enter 키를 누르세요.";
 const inputText = "댓글을 입력하세요...";
 
-class CommentForm extends Component {
+class FormContainer extends Component {
   state = {
     profile: IMG_URL
   };
@@ -70,4 +70,4 @@ class CommentForm extends Component {
   }
 }
 
-export default CommentForm;
+export default FormContainer;

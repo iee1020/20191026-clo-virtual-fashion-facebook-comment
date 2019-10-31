@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Comment from "./Comment";
-import CommentForm from "./CommentForm";
+import CommentContainer from "./CommentContainer";
+import FormContainer from "./FormContainer";
+import { connect } from "react-redux";
 
-class CommentsBox extends Component {
+class BoxContainer extends Component {
   state = {
     check: true,
     inputValue: ""
@@ -21,18 +22,19 @@ class CommentsBox extends Component {
   componentDidUpdate() {
     if (this.state.check === false) {
       this.handleChange("check", true);
+      this.commentsMap();
     }
   }
 
-  render() {
-    console.log(this.state.check);
-    const get = localStorage.getItem("CLO");
+  commentsMap = () => {
+    const { localStorage } = this.props;
     const { handleChange, localSetItem } = this;
-    const { inputValue } = this.state;
-    let mappingData = <div></div>;
-    if (get !== null) {
-      mappingData = JSON.parse(get).map((x, indx) => (
-        <Comment
+
+    let localData = <div></div>;
+
+    if (localStorage !== null) {
+      localData = localStorage.map((x, indx) => (
+        <CommentContainer
           key={x._id + indx}
           index={indx}
           dataProps={x}
@@ -41,10 +43,16 @@ class CommentsBox extends Component {
         />
       ));
     }
+    return localData;
+  };
+
+  render() {
+    const { handleChange, localSetItem, commentsMap } = this;
+    const { inputValue } = this.state;
     return (
       <div id="commentBox">
-        {mappingData}
-        <CommentForm
+        {commentsMap()}
+        <FormContainer
           inputValue={inputValue}
           handleChange={handleChange}
           localSetItem={localSetItem}
@@ -54,4 +62,6 @@ class CommentsBox extends Component {
   }
 }
 
-export default CommentsBox;
+export default connect(state => ({
+  localStorage: state.getPostComment.localStorage
+}))(BoxContainer);

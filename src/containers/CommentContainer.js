@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Comment extends Component {
+class CommentContainer extends Component {
   deleteComment = e => {
     console.log(e.target.value);
     const { value } = e.target;
@@ -45,4 +45,4 @@ class Comment extends Component {
   }
 }
 
-export default Comment;
+export default CommentContainer;
